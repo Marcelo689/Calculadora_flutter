@@ -1,0 +1,9 @@
+1.Arrumando o calculo sem sinal de igual utilizando raizes;
+2.Começando a desenvolver a formula de baskara;
+3.Terminado funcao que recebe a parte prioritaria de x^2.
+4. Terminado funcao que calcula baskara, mas não esta funcionando de alguma maneira
+está retornando null na tela e da como calculo invalido na aplicação.
+5.Parei desenvolvendo a linha 75 que passa todos os x do lado direito para o esquerdo na função resolverbaskara.
+6.Parei na linha 65 quando a raiz quadrada resulta num numero menor que zero.
+7.Terminado o basico da funcao de baskara.
+8. Tentando fazer 2xX3x
