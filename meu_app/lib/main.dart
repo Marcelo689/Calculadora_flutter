@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'screens/calculator.dart';
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 final BannerAd myBanner = BannerAd(
-  adUnitId: Platform.isAndroid ?  'ca-app-pub-3940256099942544/6300978111' : 'ca-app-pub-3940256099942544/2934735716',
+  adUnitId: defaultTargetPlatform == TargetPlatform.android
+      ? 'ca-app-pub-3940256099942544/6300978111'
+      : 'ca-app-pub-3940256099942544/2934735716',
   size: AdSize.banner,
   request: AdRequest(),
   listener: AdListener(),
