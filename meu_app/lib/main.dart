@@ -9,7 +9,7 @@ final BannerAd myBanner = BannerAd(
       : 'ca-app-pub-3940256099942544/2934735716',
   size: AdSize.banner,
   request: AdRequest(),
-  listener: AdListener(),
+  listener: BannerAdListener(),
 );
 
 
@@ -105,4 +105,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-

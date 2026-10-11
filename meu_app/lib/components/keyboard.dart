@@ -1,149 +1,60 @@
-import "package:flutter/material.dart";
-import "button.dart";
-import "button_row.dart";
+import 'package:flutter/material.dart';
+import 'button.dart';
+import 'button_row.dart';
 
 class Keyboard extends StatelessWidget {
-  final void Function(String inputText) func;
+  final void Function(String) cb;
 
-  Keyboard(this.func);
+  const Keyboard(this.cb, {Key? key}) : super(key: key);
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500,
+      color: Colors.black,
       child: Column(
         children: <Widget>[
           ButtonRow([
-            Button(
-              text: ("Before Calculate"),
-              func: func,
+            Button.operation(text: '√', cb: cb),
+            Button.operation(text: '(', cb: cb),
+            Button.operation(text: ')', cb: cb),
+            Button.operation(text: 'Ex', cb: cb, textCommand: 'Example'),
+          ]),
+          ButtonRow([
+            Button.operation(text: 'AC', color: Button.DARK, cb: cb, textColor: Colors.red),
+            Button.operation(text: '^', cb: cb),
+            Button.icon(
+              icon: Icons.backspace_outlined,
               color: Button.DARK,
-            )
+              cb: cb,
+              textCommand: 'Backspace',
+              textColor: Colors.red,
+            ),
+            Button.operation(text: '÷', color: Button.OPERATION, cb: cb),
           ]),
           ButtonRow([
-            Button(
-              text: ("√"),
-              func: func,
-              color: Button.DARK,
-            ),
-            Button(
-              text: ("("),
-              func: func,
-              color: Button.DARK,
-            ),
-            Button(
-              text: (")"),
-              func: func,
-              color: Button.DARK,
-            ),
-            Button(
-              text: ("Example"),
-              func: func,
-              color: Button.DARK,
-            ),
+            Button(text: '7', cb: cb),
+            Button(text: '8', cb: cb),
+            Button(text: '9', cb: cb),
+            Button.operation(text: 'X', color: Button.OPERATION, cb: cb),
           ]),
-          SizedBox(height: 1),
           ButtonRow([
-            Button.delete(
-              text: ("AC"),
-              func: func,
-            ),
-            Button(
-              text: ("^"),
-              func: func,
-              color: Button.DARK,
-            ),
-            Button.delete(
-              text: ("Backspace"),
-              func: func,
-            ),
-            Button.operation(
-              text: ("÷"),
-              func: func,
-            ),
+            Button(text: '4', cb: cb),
+            Button(text: '5', cb: cb),
+            Button(text: '6', cb: cb),
+            Button.operation(text: '-', color: Button.OPERATION, cb: cb),
           ]),
-          SizedBox(height: 1),
           ButtonRow([
-            Button(
-              text: ("7"),
-              func: func,
-            ),
-            Button(
-              text: ("8"),
-              func: func,
-            ),
-            Button(
-              text: ("9"),
-              func: func,
-            ),
-            Button.operation(
-              text: ("X"),
-              func: func,
-            ),
+            Button(text: '1', cb: cb),
+            Button(text: '2', cb: cb),
+            Button(text: '3', cb: cb),
+            Button.operation(text: '+', color: Button.OPERATION, cb: cb),
           ]),
-          SizedBox(height: 1),
           ButtonRow([
-            Button(
-              text: ("4"),
-              func: func,
-            ),
-            Button(
-              text: ("5"),
-              func: func,
-            ),
-            Button(
-              text: ("6"),
-              func: func,
-            ),
-            Button.operation(
-              text: ("-"),
-              func: func,
-            ),
+            Button(text: '0', cb: cb),
+            Button(text: 'x', cb: cb),
+            Button(text: '.', cb: cb),
+            Button.operation(text: '=', color: Button.OPERATION, cb: cb),
           ]),
-          SizedBox(height: 1),
-          ButtonRow([
-            Button(
-              text: ("1"),
-              func: func,
-            ),
-            Button(
-              text: ("2"),
-              func: func,
-            ),
-            Button(
-              text: ("3"),
-              func: func,
-            ),
-            Button.operation(
-              text: ("+"),
-              func: func,
-            ),
-          ]),
-          SizedBox(height: 1),
-          ButtonRow([
-            Button(
-              text: ("0"),
-              func: func,
-            ),
-            Button(
-              text: ("x"),
-              func: func,
-            ),
-            Button(
-              text: ("."),
-              func: func,
-            ),
-            Button.operation(
-              text: ("="),
-              func: func,
-            ),
-          ]),
-          SizedBox(height: 1),
-          ButtonRow([
-            Button.big(
-              text: ("Calculate"),
-              func: func,
-            ),
-          ]),
-          SizedBox(height: 1),
         ],
       ),
     );

@@ -26,10 +26,16 @@ class _AnuncioWidgetState extends State<AnuncioWidget> {
           : 'ca-app-pub-3940256099942544/2934735716',
       size: AdSize.banner,
       request: const AdRequest(),
-      listener: AdListener(
+      listener: BannerAdListener(
         onAdLoaded: (_) => setState(() => _isLoaded = true),
       ),
     )..load();
+  }
+
+  @override
+  void dispose() {
+    _banner.dispose();
+    super.dispose();
   }
 
   @override
@@ -51,7 +57,6 @@ class _AnuncioWidgetState extends State<AnuncioWidget> {
         ]
     );
   }
-
 }
 
 class Calculator extends StatefulWidget {
@@ -65,6 +70,7 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
   final Memory memory = Memory();
+  
   _onPressed(String text) {
     setState(() {
       memory.applyCommand(text);
@@ -73,16 +79,69 @@ class _CalculatorState extends State<Calculator> {
 
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Column(
-      children: <Widget>[
-        if (widget.showAd) const AnuncioWidget(),
-        Display(memory.value),
-        Keyboard(_onPressed),
-      ],
-    ));
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              if (widget.showAd) const AnuncioWidget(),
+              Display(memory.value),
+              
+              // Botão Before Calculate acima do teclado
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[800],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    onPressed: () => _onPressed('Before Calculate'),
+                    child: const Text(
+                      'Before Calculate',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
+                ),
+              ),
+
+              Expanded(
+                child: Keyboard(_onPressed),
+              ),
+
+              // Botão Calculate na parte inferior, totalmente visível acima da barra de navegação
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[800],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    onPressed: () => _onPressed('Calculate'),
+                    child: const Text(
+                      'Calculate',
+                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
